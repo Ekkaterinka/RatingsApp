@@ -1,0 +1,14 @@
+{
+  "name": "ratings-app-ios",
+  "version": "0.0.1",
+  "description": "",
+  "cordova": {
+    "id": "ekaterina-ratings",
+    "platforms": []
+  },
+  "keywords": [
+    "ecosystem:cordova"
+  ],
+  "author": "Ekaterina Belova",
+  "license": "ISC"
+}

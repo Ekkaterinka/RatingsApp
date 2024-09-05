@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='utf-8'?>
+<plugin id="ekaterina-ratings" version="0.0.1" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
+    <name>RatingsApp</name>
+    <js-module name="RatingsApp" src="www/Ratings.js">
+        <clobbers target="appStoreReview"/>
+    </js-module>
+    <platform name="ios">
+        <header-file src="src/Ratings.h"/>
+        <source-file src="src/Ratings.m"/>
+        <config-file target="config.xml" parent="/*">
+            <feature name="Ratings">
+                <param name="ios-package" value="appStoreReview" />
+            </feature>
+        </config-file>
+        <framework src="StoreKit.framework"/>
+  </platform>
+</plugin>
