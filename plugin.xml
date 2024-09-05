@@ -1,6 +1,8 @@
 <?xml version='1.0' encoding='utf-8'?>
 <plugin id="ekaterina-ratings" version="0.0.1" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
     <name>RatingsApp</name>
+    <description>Cordova Ratings App IOS10.3+ Plugin</description>
+    <keywords>requestReview,ios</keywords>
     <js-module name="RatingsApp" src="www/Ratings.js">
         <clobbers target="appStoreReview"/>
     </js-module>
