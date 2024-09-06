@@ -6,9 +6,10 @@
 - (void) appStoreReview:(CDVInvokedUrlCommand *)command{
     CDVPluginResult* pluginResult = nil;
     NSNumber* numberVisits = [command.arguments objectAtIndex:0];
+    NSNumber* sufficientNumberVisits = [command.arguments objectAtIndex:1];
     
     if (@available(iOS 10.3, *)) {
-        if ([numberVisits intValue] >= 10) {
+        if (numberVisits >= sufficientNumberVisits) {
             [SKStoreReviewController requestReview];
             pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"AppStoreReview start"];
         } else {
