@@ -1,14 +1,28 @@
 <?xml version='1.0' encoding='utf-8'?>
-<plugin id="cordova-plugin-app-store-ratings-ios" version="0.0.1" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
-    <name>cordova-plugin-app-store-ratings-ios</name>
-    <description>Cordova Ratings App IOS10.3+ Plugin</description>
-    <keywords>requestReview,ios</keywords>
+<plugin id="cordova-plugin-app-ratings-in-store" version="0.0.1" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
+    <name>cordova-plugin-app-ratings-in-store</name>
+    <description>Cordova Ratings App IOS10.3+, Android Plugin</description>
+    <keywords>requestReview,requestReviewFlow, ios, android</keywords>
+    <engines>
+		<engine name="cordova-android" version=">=7.0.0" />
+	</engines>
     <js-module name="appStoreReview" src="www/ratings.js">
         <clobbers target="appStoreReview"/>
     </js-module>
+    <platform name="android">
+		<config-file parent="/*" target="res/xml/config.xml">
+			<feature name="ratings">
+				<param name="android-package" value="com.coloz.ratings.ratings" />
+				<param name="onload" value="true" />
+			</feature>
+		</config-file>
+		<source-file src="src/android/ratings.java" target-dir="src/com/coloz/ratings/" />
+		<preference name="ANDROID_SUPPORT_VERSION" default="28.+" />
+		<framework src="com.android.support:support-v4:$ANDROID_SUPPORT_VERSION" />
+	</platform>
     <platform name="ios">
-        <header-file src="src/ratings.h"/>
-        <source-file src="src/ratings.m"/>
+        <header-file src="src/ios/ratings.h"/>
+        <source-file src="src/ios/ratings.m"/>
         <config-file target="config.xml" parent="/*">
             <feature name="ratings">
                 <param name="ios-package" value="ratings" />

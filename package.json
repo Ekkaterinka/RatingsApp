@@ -1,15 +1,23 @@
 {
-  "name": "cordova-plugin-app-store-ratings-ios",
+  "name": "cordova-plugin-app-ratings-in-store",
   "version": "0.0.1",
-  "description": "Cordova Ratings App IOS10.3+ Plugin",
+  "description": "Cordova Ratings App IOS10.3+, Android Plugin",
   "cordova": {
-    "id": "cordova-plugin-app-store-ratings-ios",
-    "platforms": ["ios"]
+    "id": "cordova-plugin-app-ratings-in-store",
+    "platforms": ["ios", "android"]
   },
   "keywords": [
-    "requestReview",
-    "ios"
+    "requestReview", "requestReviewFlow",
+    "ios", "android"
   ],
   "author": "Ekaterina Belova",
-  "license": "ISC"
+  "license": "ISC",
+  "engines": {
+    "cordovaDependencies": {
+      "3.0.0": {
+        "cordova-electron": ">=3.0.0",
+        "cordova-android": ">=7.0.0"
+      }
+    }
+  }
 }
