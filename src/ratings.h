@@ -1,7 +1,8 @@
-#import <Cordova/CDVPlugin.h>
 #import <Cordova/CDVPluginResult.h>
+#import <Cordova/CDVPlugin.h>
+#import <StoreKit/StoreKit.h>
 
-@interface Ratings : CDVPlugin
+@interface ratings : CDVPlugin
 
 - (void)appStoreReview:(CDVInvokedUrlCommand*)command;
 

@@ -3,15 +3,15 @@
     <name>cordova-plugin-app-store-ratings-ios</name>
     <description>Cordova Ratings App IOS10.3+ Plugin</description>
     <keywords>requestReview,ios</keywords>
-    <js-module name="appStoreReview" src="www/Ratings.js">
+    <js-module name="appStoreReview" src="www/ratings.js">
         <clobbers target="appStoreReview"/>
     </js-module>
     <platform name="ios">
-        <header-file src="src/Ratings.h"/>
-        <source-file src="src/Ratings.m"/>
+        <header-file src="src/ratings.h"/>
+        <source-file src="src/ratings.m"/>
         <config-file target="config.xml" parent="/*">
-            <feature name="Ratings">
-                <param name="ios-package" value="appStoreReview" />
+            <feature name="ratings">
+                <param name="ios-package" value="ratings" />
             </feature>
         </config-file>
         <framework src="StoreKit.framework"/>
