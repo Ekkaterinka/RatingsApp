@@ -12,7 +12,7 @@
     <platform name="android">
 		<config-file parent="/*" target="res/xml/config.xml">
 			<feature name="ratings">
-				<param name="android-package" value="com.coloz.ratings.ratings" />
+				<param name="android-package" value="com.microline.zont.ratings" />
 				<param name="onload" value="true" />
 			</feature>
 		</config-file>
