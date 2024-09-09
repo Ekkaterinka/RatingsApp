@@ -19,18 +19,8 @@ public class ratings extends CordovaPlugin {
     super.initialize(cordova, webView);
   }
   
-  @Override
-  public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
-      if (action.equals("appStoreReview")) {
-          String message = args.getString(0);
-          this.appStoreReview(message, callbackContext);
-          return true;
-      }
-      return false;
-  }
-
-  private void appStoreReview(String message, CallbackContext callbackContext) {
-      if (message != null && message.length() > 0) {
+  protected void appStoreReview(int numberVisits, CallbackContext callbackContext) {
+      if (numberVisits != null && numberVisits >= 10) {
         ReviewManager manager = ReviewManagerFactory.create(this);
           Task<ReviewInfo> request = manager.requestReviewFlow();
           request.addOnCompleteListener(task -> {
@@ -42,9 +32,19 @@ public class ratings extends CordovaPlugin {
                 @ReviewErrorCode int reviewErrorCode = ((ReviewException) task.getException()).getErrorCode();
             }
           });
-          callbackContext.success(message);
+          callbackContext.success(numberVisits);
       } else {
           callbackContext.error("Expected one non-empty string argument.");
       }
+  }
+
+  @Override
+  public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
+      if (action.equals("appStoreReview")) {
+          int numberVisits = args.getInt(0);
+          appStoreReview(numberVisits, callbackContext);
+          return true;
+      }
+      return false;
   }
 }
