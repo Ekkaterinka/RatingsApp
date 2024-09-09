@@ -24,8 +24,20 @@ public class ratings extends CordovaPlugin {
             if (task.isSuccessful()) {
 
                 ReviewInfo reviewInfo = task.getResult();
-            } else {
+                Task<Void> flow = manager.launchReviewFlow(cordova.getActivity(), reviewInfo);
+                flow.addOnCompleteListener(launchTask -> {
+                    try {
+                        if (task.isSuccessful()) {
+                            callbackContext.success("Task requested");
+                        } else {
+                            callbackContext.error("Task failed: ".concat(launchTask.getException().getMessage()));
+                        }
+                    } catch (Exception e) {
+                        callbackContext.error("Exception occurred: ".concat(e.getMessage()));
+                    }
+                });
 
+            } else {
                 @ReviewErrorCode int reviewErrorCode = ((ReviewException) task.getException()).getErrorCode();
             }
           });
