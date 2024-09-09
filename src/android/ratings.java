@@ -1,8 +1,9 @@
 package com.coloz.ratings;
 
-import com.google.android.play:review;
-
-package org.apache.cordova.plugin;
+import com.google.android.play.core.review.ReviewInfo;
+import com.google.android.play.core.review.ReviewManager;
+import com.google.android.play.core.review.ReviewManagerFactory;
+import com.google.android.play.core.review.ReviewRequest;
 
 import org.apache.cordova.CordovaPlugin;
 import org.apache.cordova.CallbackContext;
@@ -13,14 +14,9 @@ import org.json.JSONObject;
 
 
 public class ratings extends CordovaPlugin {
-
-  @Override
-  public void initialize(CordovaInterface cordova, CordovaWebView webView) {
-    super.initialize(cordova, webView);
-  }
   
   protected void appStoreReview(int numberVisits, CallbackContext callbackContext) {
-      if (numberVisits != null && numberVisits >= 10) {
+      if (numberVisits >= 10) {
         ReviewManager manager = ReviewManagerFactory.create(this);
           Task<ReviewInfo> request = manager.requestReviewFlow();
           request.addOnCompleteListener(task -> {

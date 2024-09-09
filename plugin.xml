@@ -19,6 +19,7 @@
 		<source-file src="src/android/ratings.java" target-dir="src/com/coloz/ratings/" />
 		<preference name="ANDROID_SUPPORT_VERSION" default="28.+" />
 		<framework src="com.android.support:support-v4:$ANDROID_SUPPORT_VERSION" />
+        <framework src="com.google.android.play:review:2.0.1" />
 	</platform>
     <platform name="ios">
         <header-file src="src/ios/ratings.h"/>
