@@ -1,40 +1,39 @@
-package com.coloz.esptouch;
-
-import android.content.Intent;
-import android.os.AsyncTask;
-import android.os.Bundle;
-import android.util.Log;
-
-import java.util.List;
+package com.coloz.ratings;
 
 import com.google.android.play:review;
 
-import org.apache.cordova.CallbackContext;
-import org.apache.cordova.CordovaPlugin;
+package org.apache.cordova.plugin;
 
-import org.apache.cordova.*;
+import org.apache.cordova.CordovaPlugin;
+import org.apache.cordova.CallbackContext;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class appStoreReview extends CordovaPlugin {
-  private CallbackContext esptouchCallbackContext;
-  private final Object mLock = new Object();
-  private static final String TAG = "appStoreReview";
+
+public class ratings extends CordovaPlugin {
 
   @Override
   public void initialize(CordovaInterface cordova, CordovaWebView webView) {
     super.initialize(cordova, webView);
   }
-
-
+  
   @Override
-  public boolean execute(String action, final JSONArray args, final CallbackContext callbackContext)
-    throws JSONException {
-    if (action.equals("appStoreReview")) {
+  public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
+      if (action.equals("appStoreReview")) {
+          String message = args.getString(0);
+          this.appStoreReview(message, callbackContext);
+          return true;
+      }
+      return false;
+  }
+
+  private void appStoreReview(String message, CallbackContext callbackContext) {
+      if (message != null && message.length() > 0) {
         ReviewManager manager = ReviewManagerFactory.create(this);
-        Task<ReviewInfo> request = manager.requestReviewFlow();
-        request.addOnCompleteListener(task -> {
+          Task<ReviewInfo> request = manager.requestReviewFlow();
+          request.addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 
                 ReviewInfo reviewInfo = task.getResult();
@@ -42,11 +41,10 @@ public class appStoreReview extends CordovaPlugin {
              
                 @ReviewErrorCode int reviewErrorCode = ((ReviewException) task.getException()).getErrorCode();
             }
-        });
-    } else {
-      callbackContext.error("can not find the function " + action);
-    }
-    return true;
+          });
+          callbackContext.success(message);
+      } else {
+          callbackContext.error("Expected one non-empty string argument.");
+      }
   }
-
 }
