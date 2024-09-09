@@ -12,11 +12,11 @@
     <platform name="android">
 		<config-file parent="/*" target="res/xml/config.xml">
 			<feature name="ratings">
-				<param name="android-package" value="com.microline.zont.ratings" />
+				<param name="android-package" value="com.microline.zont.ratings.ratings" />
 				<param name="onload" value="true" />
 			</feature>
 		</config-file>
-		<source-file src="src/android/ratings.java" target-dir="src/com/coloz/ratings/" />
+		<source-file src="src/android/ratings.java" target-dir="app/src/main/java/com/microline/zont/ratings/" />
 		<preference name="ANDROID_SUPPORT_VERSION" default="28.+" />
 		<framework src="com.android.support:support-v4:$ANDROID_SUPPORT_VERSION" />
         <framework src="com.google.android.play:review:2.0.1" />
