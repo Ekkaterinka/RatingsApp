@@ -9,14 +9,18 @@
     NSNumber* sufficientNumberVisits = [command.arguments objectAtIndex:1];
     
     if (@available(iOS 10.3, *)) {
-        
-        if (numberVisits >= sufficientNumberVisits) {
-            [SKStoreReviewController requestReview];
-            pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"AppStoreReview start"];
-        } else {
-            pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"The condition did not pass"];
+        if (numberVisits != nil && sufficientNumberVisits != nil){
+            NSComparisonResult resultCompare = [numberVisits compare:sufficientNumberVisits];
+           
+            if (resultCompare == NSOrderedSame || resultCompare == NSOrderedDescending) {
+                
+                [SKStoreReviewController requestReview];
+                pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"AppStoreReview start"];
+            } else {
+                pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"The condition did not pass"];
+            }
+            [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
         }
-        [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
 
     }
 }
