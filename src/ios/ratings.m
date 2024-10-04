@@ -5,24 +5,18 @@
 
 - (void) appStoreReview:(CDVInvokedUrlCommand *)command{
     CDVPluginResult* pluginResult = nil;
-    NSNumber* numberVisits = [command.arguments objectAtIndex:0];
-    NSNumber* sufficientNumberVisits = [command.arguments objectAtIndex:1];
     
-    if (@available(iOS 10.3, *)) {
-        if (numberVisits != nil && sufficientNumberVisits != nil){
-            NSComparisonResult resultCompare = [numberVisits compare:sufficientNumberVisits];
-           
-            if (resultCompare == NSOrderedSame || resultCompare == NSOrderedDescending) {
-                
-                [SKStoreReviewController requestReview];
-                pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"AppStoreReview start"];
-            } else {
-                pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"The condition did not pass"];
-            }
-            [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+    if (@available(iOS 14, *)) {
+        [SKStoreReviewController requestReviewInScene: self.viewController.view.window.windowScene];
+        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"Review requested"];
+        } else if (@available(iOS 10.3, *)){
+            [SKStoreReviewController requestReview];
+            pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"Review requested"];
+        } else {
+            pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"Review failed"];
         }
+        [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
 
-    }
 }
 
 @end
