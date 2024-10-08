@@ -5,8 +5,8 @@
 Вы можете зафиксировать первый вызов функции и дальше в работе приложения проверять был ли уже вызов, например, за последние 3 месяца и дальше принимать решения для последующего вызова.
 
 Пример вызова:
-
-*index.d.ts*
+```
+//index.d.ts
 
 interface Window {
     appStoreReview: AppStoreReview;
@@ -19,7 +19,7 @@ interface AppStoreReview {
     ): void;
 }
 
-*index.tsx*
+//index.tsx
 
 export function fixStoreReview(
 success_callback: (success: any) => void,
@@ -27,7 +27,8 @@ fail_callback: (error: string) => void
 ) {
   return window.appStoreReview.appStoreReview(success_callback, fail_callback);
   }
-    
+
+
 const start = useCallback(async () => {
         try {
             await new Promise<void>((resolve, reject) =>
@@ -60,3 +61,4 @@ const start = useCallback(async () => {
             console.error('FAILED appStoreReview', e);
         }
     }, []);
+```
